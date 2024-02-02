@@ -3,8 +3,7 @@ from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__, template_folder = "templates")
 
-todos = [{"task": "Default Task", "done": False}]
-
+todos = []
 
 @app.route("/")
 def index():
@@ -13,7 +12,7 @@ def index():
 
 @app.route("/add", methods=["POST"])
 def add():
-    todo = request.form['todo']
+    todo = request.form["todo"]
     todos.append({"task": todo, "done": False})
     return redirect(url_for("index"))
 
@@ -25,7 +24,7 @@ def edit(index):
         todo['task'] = request.form['todo']
         return redirect(url_for("index"))
     else:
-        return render_template("edit.html", todo = todo, index=index)
+        return render_template("edit.html", todo = todo, index = index)
 
 
 @app.route("/check/<int:index>")
